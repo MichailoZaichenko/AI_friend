@@ -8,9 +8,9 @@ import openai
 logger = telebot.logger
 telebot.logger.setLevel(logging.DEBUG)
 
-bot = telebot.TeleBot('6574898144:AAEDLJxrqK0d4YMu4zqGyjFPAcmZQvpQPyw')
-openai.api_key = ("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")
-user_id = int('879548531')
+bot = telebot.TeleBot('BOT_API_KEY')
+openai.api_key = ("OPENAI_API_KEY")
+user_id = int('USER_KEY')
 
 
 @bot.message_handler(func=lambda message: True)

@@ -2,9 +2,10 @@ import openai
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
+from env import BOT_API_KEY, OPENAI_API_KEY
 
-token = '6574898144:AAEDLJxrqK0d4YMu4zqGyjFPAcmZQvpQPyw'
-openai.api_key = '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'
+token = BOT_API_KEY
+openai.api_key = OPENAI_API_KEY
 
 bot = Bot(token)
 dp = Dispatcher(bot)
@@ -12,14 +13,10 @@ dp = Dispatcher(bot)
 @dp.message_handler()
 async def send(message : types.Message):
     response = openai.ChatCompletion.create(
-    model="text-davinci-003", 
-    prompt=message.text, 
-    temperature=0.9, 
-    max_tokens=1000, 
-    top_p=1.0, 
-    frequency_penalty=0.0, 
-    presence_penalty=0.6, 
-    stop=["You:"]
+    model="gpt-3.5-turbo",
+    messages=[],
+    temperature=0.5,
+    max_tokens=256
 )
 
     await message.answer(response['choices'][0]['text'])
