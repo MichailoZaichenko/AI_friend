@@ -1,24 +1,10 @@
-import openai
-from aiogram import Bot, types
-from aiogram.dispatcher import Dispatcher
-from aiogram.utils import executor
-from env import BOT_API_KEY, OPENAI_API_KEY
+import g4f
 
-token = BOT_API_KEY
-openai.api_key = OPENAI_API_KEY
+def ask_gpt(promt:str)->str:
+    response = g4f.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": promt}],
+    )
+    return response
 
-bot = Bot(token)
-dp = Dispatcher(bot)
-
-@dp.message_handler()
-async def send(message : types.Message):
-    response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[],
-    temperature=0.5,
-    max_tokens=256
-)
-
-    await message.answer(response['choices'][0]['text'])
-
-executor.start_polling(dp, skip_updates=True)
+print(ask_gpt('How are you?'))
