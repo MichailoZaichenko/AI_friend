@@ -22,6 +22,7 @@ def get_response(message):
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": message}],
     )
-    bot.send_message(message.chat.id, f'{response["choices"][0]["text"]}', parse_mode="None")
-
+    # response_text = response['choices'][0]['message']['content']
+    # bot.send_message(message.chat.id, response_text)
+    bot.send_message(message.chat.id, response)
 bot.infinity_polling()
